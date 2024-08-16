@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>K-Pop Merchandise Store</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>K-Pop Merchandise</h1>
+            <nav>
+                <ul>
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#shop">Shop</a></li>
+                    <li><a href="#about">About Us</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </nav>
+            <div class="search-container">
+                <input type="text" id="search-bar" placeholder="Search products...">
+                <button id="search-button">Search</button>
+                <button id="clear-search">Clear</button>
+            </div>
+            
+        <a id="cart-icon" href="cart.html">
+        <img src="cart-icon.png" alt="Cart Icon">
+        <span id="cart-count"></span>
+    </a>
+    </header>
+
+<div id="cart-overlay">
+        <div id="cart-content">
+            <h2>Your Cart</h2>
+            <ul id="cart-items"></ul>
+            <button id="close-cart">Close</button>
+        </div>
+    </div>
+
+    <section id="hero">
+        <div class="hero-content">
+            <h2>Welcome to the Ultimate K-Pop Store!</h2>
+            <p>Find all your favorite K-Pop merch here.</p>
+            <a href="#shop" class="btn">Shop Now</a>
+        </div>
+    </section>
+
+    <section id="shop">
+        <div class="container">
+            <!-- "Featured Products" heading -->
+            <h2 id="featured-products-heading">Featured Products</h2>
+
+            <!-- "Product Unavailable" message -->
+            <p id="no-results" style="display: none;">Product Unavailable</p>
+
+            <div class="product-grid">
+                <div class="product" data-id="1" data-name="Product 1" data-price="19.99" data-image="product1.jpg">
+    <img src="product1.jpg" alt="Product 1">
+    <h2>Product 1</h2>
+    <p>$19.99</p>
+    <button class="add-to-cart">Add to Cart</button>
+    <button class="buy-now">Buy Now</button>
+</div>
+                <div class="product" data-id="2" data-name="Product 2" data-price="24.99" data-image="product2.jpg">
+                    <img src="product2.jpg" alt="Product 2">
+                    <h3>Product 2</h3>
+                    <p>$24.99</p>
+                    <button class="add-to-cart">Add to Cart</button>
+                    <button class="buy-now">Buy Now</button>
+                </div>
+                <div class="product" data-id="3" data-name="Product 3" data-price="29.99" data-image="product3.jpg">
+                    <img src="product3.jpg" alt="Product 3">
+                    <h3>Product 3</h3>
+                    <p>$29.99</p>
+                    <button class="add-to-cart">Add to Cart</button>
+                    <button class="buy-now">Buy Now</button>
+                </div>
+                <div class="product" data-id="4" data-name="Product 4" data-price="34.99" data-image="product4.jpg">
+                    <img src="product4.jpg" alt="Product 4">
+                    <h3>Product 4</h3>
+                    <p>$34.99</p>
+                    <button class="add-to-cart">Add to Cart</button>
+                    <button class="buy-now">Buy Now</button>
+                </div>
+                <div class="product" data-id="5" data-name="Product 5" data-price="39.99" data-image="product5.jpg">
+                    <img src="product5.jpg" alt="Product 5">
+                    <h3>Product 5</h3>
+                    <p>$39.99</p>
+                    <button class="add-to-cart">Add to Cart</button>
+                    <button class="buy-now">Buy Now</button>
+                </div>
+                <div class="product" data-id="6" data-name="Product 6" data-price="44.99" data-image="product6.jpg">
+                    <img src="product6.jpg" alt="Product 6">
+                    <h3>Product 6</h3>
+                    <p>$44.99</p>
+                    <button class="add-to-cart">Add to Cart</button>
+                    <button class="buy-now">Buy Now</button>
+                </div>
+                <div class="product" data-id="7" data-name="Product 7" data-price="49.99" data-image="product7.jpg">
+                    <img src="product7.jpg" alt="Product 7">
+                    <h3>Product 7</h3>
+                    <p>$49.99</p>
+                    <button class="add-to-cart">Add to Cart</button>
+                    <button class="buy-now">Buy Now</button>
+                </div>
+                <div class="product" data-id="8" data-name="Product 8" data-price="54.99" data-image="product8.jpg">
+                    <img src="product8.jpg" alt="Product 8">
+                    <h3>Product 8</h3>
+                    <p>$54.99</p>
+                    <button class="add-to-cart">Add to Cart</button>
+                    <button class="buy-now">Buy Now</button>
+                </div>
+                <div class="product" data-id="9" data-name="Product 9" data-price="59.99" data-image="product9.jpg">
+                    <img src="product9.jpg" alt="Product 9">
+                    <h3>Product 9</h3>
+                    <p>$59.99</p>
+                    <button class="add-to-cart">Add to Cart</button>
+                    <button class="buy-now">Buy Now</button>
+                </div>
+                <div class="product" data-id="10" data-name="Product 10" data-price="64.99" data-image="product10.jpg">
+                    <img src="product10.jpg" alt="Product 10">
+                    <h3>Product 10</h3>
+                    <p>$64.99</p>
+                    <button class="add-to-cart">Add to Cart</button>
+                    <button class="buy-now">Buy Now</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="about">
+        <div class="container">
+            <h2>About Us</h2>
+            <p>Welcome to our K-Pop Merchandise Store! We are passionate fans of K-Pop and dedicated to bringing you the best selection of merchandise from your favorite artists. Whether you're looking for the latest albums, stylish apparel, or exclusive collectibles, we've got you covered.</p>
+            <p>Our mission is to provide high-quality products and exceptional customer service. Thank you for supporting our store and being part of the K-Pop community!</p>
+        </div>
+    </section>
+
+    <section id="contact">
+        <div class="container">
+            <h2>Contact Us</h2>
+            <form>
+                <label for="name">Name:</label>
+                <input type="text" id="name" name="name" required>
+                
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email" required>
+                
+                <label for="message">Message:</label>
+                <textarea id="message" name="message" rows="4" required></textarea>
+                
+                <button type="submit">Send Message</button>
+            </form>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2024 K-Pop Merchandise Store. All rights reserved.</p>
+            <div class="social-media">
+                <a href="#">Facebook</a>
+                <a href="#">Twitter</a>
+                <a href="#">Instagram</a>
+            </div>
+        </div>
+    </footer>
+
+<script src="script.js"></script>
+</body>
+</html>

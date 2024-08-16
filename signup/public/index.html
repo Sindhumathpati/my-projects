@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .popup {
+            display: none;
+            position: fixed;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: #f44336;
+            color: white;
+            padding: 20px;
+            border-radius: 5px;
+            z-index: 1000;
+        }
+        .popup-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .popup-close {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 20px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div id="popup" class="popup">
+        <div class="popup-content">
+            <span id="popup-message" class="popup-message"></span>
+            <button id="popup-close" class="popup-close">&times;</button>
+        </div>
+    </div>
+    <div class="container">
+        <h1>Sign Up</h1>
+        <form action="/signup" method="POST">
+            <div class="form-group">
+                <label for="firstname">First Name</label>
+                <input type="text" id="firstname" name="firstname" required>
+            </div>
+            <div class="form-group">
+                <label for="lastname">Last Name</label>
+                <input type="text" id="lastname" name="lastname" required>
+            </div>
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input type="email" id="email" name="email" required>
+            </div>
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input type="password" id="password" name="password" required>
+            </div>
+            <div class="form-group">
+                <label for="confirm-password">Confirm Password</label>
+                <input type="password" id="confirm-password" name="confirm-password" required>
+            </div>
+            <div class="form-group">
+                <button type="submit">Sign Up</button>
+            </div>
+        </form>
+        <div id="message" class="message"></div>
+        <p>Already have an account? <a href="login.html">Log in here</a>.</p>
+    </div>
+    <!-- Popup HTML -->
+<div id="popup" class="popup">
+    <div class="popup-content">
+        <span id="popup-close" class="popup-close">&times;</span>
+        <p id="popup-message"></p>
+    </div>
+</div>
+
+<script>
+    document.getElementById('signup-form').addEventListener('submit', async function(event) {
+        event.preventDefault(); // Prevent the default form submission
+    
+        const firstname = document.getElementById('firstname').value;
+        const lastname = document.getElementById('lastname').value;
+        const email = document.getElementById('email').value;
+        const password = document.getElementById('password').value;
+        const confirmPassword = document.getElementById('confirm-password').value;
+        const messageElement = document.getElementById('message');
+    
+        // Validation
+        if (!firstname || !lastname || !email || !password || !confirmPassword) {
+            showPopup('All fields are required.');
+            return;
+        }
+    
+        const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!emailPattern.test(email)) {
+            showPopup('Please enter a valid email address.');
+            return;
+        }
+    
+        if (password !== confirmPassword) {
+            showPopup('Passwords do not match.');
+            return;
+        }
+    
+        // Prepare form data
+        const formData = new FormData(this);
+    
+        try {
+            // Send signup request
+            const response = await fetch('/api/signup', {
+                method: 'POST',
+    body: formData
+});
+
+            if (result === 'User registered successfully') {
+                // Show success popup message
+                alert('User registered successfully');
+    
+                // Redirect to the login page
+                window.location.href = '/login.html'; // Use window.location.href for redirect
+            }
+            
+            // Send OTP (Assuming you need this, but it should probably be a separate process)
+            const otpResponse = await fetch('/send-otp', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ email }) // Send relevant data
+            });
+    
+            if (!otpResponse.ok) {
+                throw new Error(`HTTP error! status: ${otpResponse.status}`);
+            }
+    
+            const otpData = await otpResponse.json();
+            if (otpData.success) {
+                messageElement.textContent = 'Thank you for logging in. Check your mail for verification.';
+                messageElement.style.color = 'green';
+            } else {
+                messageElement.textContent = 'Error: ' + otpData.message;
+                messageElement.style.color = 'red';
+            }
+        } catch (error) {
+            console.error('Error:', error);
+            messageElement.textContent = 'An unexpected error occurred.';
+            messageElement.style.color = 'red';
+        }
+    });
+    
+    function showPopup(message) {
+        alert(message); // You can replace this with custom popup logic if needed
+    }
+    
+    
+    
+        function showPopup(message) {
+    const popup = document.getElementById('popup');
+    const popupMessage = document.getElementById('popup-message');
+    popupMessage.textContent = message;
+    popup.style.display = 'flex';
+}
+
+document.getElementById('popup-close').addEventListener('click', function() {
+    document.getElementById('popup').style.display = 'none';
+});
+
+    </script>
+</body>
+</html>
+
+
+</body>
+</html>

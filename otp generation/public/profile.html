@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile</title>
+    <link rel="stylesheet" href="styless.css">
+</head>
+<body>
+
+<div class="profile-page">
+    <h2>Welcome to Your Profile</h2>
+    <p id="user-info">Loading user information...</p>
+    
+    <!-- Logout Button -->
+    <div class="logout">
+        <button id="logout-btn">Logout</button>
+    </div>
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Fetch user info from server
+    fetch('/user-info') // Adjust endpoint as needed
+        .then(response => response.json())
+        .then(data => {
+            const userInfo = document.getElementById('user-info');
+            if (data.success) {
+                userInfo.textContent = `Hello, ${data.firstname} ${data.lastname}. Email: ${data.email}`;
+            } else {
+                userInfo.textContent = 'Unable to fetch user information.';
+            }
+        })
+        .catch(error => {
+            console.error('Error fetching user info:', error);
+            document.getElementById('user-info').textContent = 'Error loading user information.';
+        });
+
+    // Logout Button
+    document.getElementById('logout-btn').addEventListener('click', function() {
+        fetch('/logout', { // Adjust endpoint as needed
+            method: 'POST'
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                window.location.href = '/'; // Redirect to the login page
+            } else {
+                alert('Error logging out.');
+            }
+        })
+        .catch(error => {
+            console.error('Error during logout:', error);
+            alert('An unexpected error occurred.');
+        });
+    });
+});
+</script>
+
+</body>
+</html>

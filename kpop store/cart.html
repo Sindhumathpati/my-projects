@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cart | KPop Store</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        /* Basic Styles for Cart Page */
+        body {
+            font-family: Arial, sans-serif;
+            background: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            width: 80%;
+            margin: auto;
+            overflow: hidden;
+        }
+
+        header {
+            background: #333;
+            color: #fff;
+            padding: 10px 0;
+            text-align: center;
+        }
+
+        header h1 {
+            margin: 0;
+        }
+
+        #cart-content {
+            background: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            margin-top: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        #cart-content h2 {
+            margin-bottom: 20px;
+        }
+
+        #cart-items {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        #cart-items li {
+            padding: 10px;
+            border-bottom: 1px solid #ddd;
+        }
+
+        #cart-items img {
+    max-width: 100px;  /* Maximum width of the image */
+    max-height: 100px; /* Maximum height of the image */
+    width: auto;       /* Maintain aspect ratio */
+    height: auto;      /* Maintain aspect ratio */
+    border-radius: 5px; /* Optional: rounded corners */
+    margin-right: 10px; /* Space between image and text */
+}
+
+        #cart-items li:last-child {
+            border-bottom: none;
+        }
+
+.remove-item {
+            background: #e74c3c;
+            color: #fff;
+            border: none;
+            padding: 5px 10px;
+            cursor: pointer;
+            border-radius: 5px;
+            font-size: 14px;
+        }
+
+        .remove-item:hover {
+            background: #c0392b;
+        }
+
+        #cart-total {
+            margin-top: 20px;
+            font-weight: bold;
+            font-size: 18px;
+        }
+
+        .back-to-shop {
+            display: block;
+            width: 200px;
+            margin: 20px auto;
+            text-align: center;
+            background: #333;
+            color: #fff;
+            padding: 10px;
+            border-radius: 5px;
+            text-decoration: none;
+        }
+
+        .back-to-shop:hover {
+            background: #555;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>KPop Store</h1>
+    </header>
+
+    <div class="container">
+        <div id="cart-content">
+            <h2>Your Cart</h2>
+            <ul id="cart-items">
+                <!-- Cart items will be inserted here by JavaScript -->
+            </ul>
+            <div id="cart-total">
+                <!-- Cart total will be inserted here by JavaScript -->
+            </div>
+            <a href="index.html" class="back-to-shop">Back to Shop</a>
+        </div>
+    </div>
+
+    <script>
+        // Retrieve cart from localStorage
+        const cart = JSON.parse(localStorage.getItem('cart')) || [];
+
+        // Function to update cart display
+        function updateCart() {
+            const cartItemsElement = document.getElementById('cart-items');
+            const cartTotalElement = document.getElementById('cart-total');
+            
+            // Clear current cart items
+            cartItemsElement.innerHTML = '';
+            
+            // Calculate total price
+            let total = 0;
+            
+            cart.forEach((item, index) => {
+                const li = document.createElement('li');
+                li.innerHTML = `
+                    <img src="${item.image}" alt="${item.name}">
+                    ${item.name} - Quantity: ${item.quantity} - $${(item.price * item.quantity).toFixed(2)}
+                    <button class="remove-item" data-index="${index}">Remove</button>
+                `;
+                cartItemsElement.appendChild(li);
+                total += item.quantity * item.price;
+            });
+            
+            // Update total price
+            cartTotalElement.textContent = `Total: $${total.toFixed(2)}`;
+        }
+
+// Function to remove item from cart
+        function removeFromCart(index) {
+            cart.splice(index, 1);
+            localStorage.setItem('cart', JSON.stringify(cart));
+            updateCart();
+        }
+
+        // Event listener for remove buttons
+        document.getElementById('cart-items').addEventListener('click', function(event) {
+            if (event.target.classList.contains('remove-item')) {
+                const index = event.target.getAttribute('data-index');
+                removeFromCart(index);
+            }
+        });
+
+        // Initial cart update
+        updateCart();
+    </script>
+</body>
+</html>
